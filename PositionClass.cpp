@@ -14,8 +14,8 @@ PositionClass::PositionClass()
 
 	m_frameTime = 0.0f;
 
-	a_moveSpeedUp = 20.0f;
-	a_moveSpeedDown = 2.0f;
+	/*a_moveSpeedUp = 20.0f;
+	a_moveSpeedDown = 2.0f;*/
 
 	m_forwardSpeed = 00.0f;
 	m_backwardSpeed = 0.0f;
@@ -73,15 +73,16 @@ void PositionClass::MoveForward(bool keydown)
 	// Update the forward speed movement based on the frame time and whether the user is holding the key down or not.
 	if (keydown)
 	{
-		m_forwardSpeed += m_frameTime * a_moveSpeedUp;
-		if (m_forwardSpeed > (m_frameTime * 150.0f))
+		m_forwardSpeed += m_frameTime * 0.003f;
+
+		if (m_forwardSpeed > (m_frameTime * 0.15f))
 		{
-			m_forwardSpeed = m_frameTime * 150.0f;
+			m_forwardSpeed = m_frameTime * 0.15f;
 		}
 	}
 	else
 	{
-		m_forwardSpeed -= m_frameTime * a_moveSpeedDown;
+		m_forwardSpeed -= m_frameTime * 0.0007f;
 
 		if (m_forwardSpeed < 0.0f)
 		{
@@ -90,11 +91,11 @@ void PositionClass::MoveForward(bool keydown)
 	}
 
 	// Convert degrees to radians.
-	radians = m_rotationY * 0.0174532925f;	//=2pi/360
+	radians = m_rotationY *0.0174532925f;	//=2pi/360
 
 	// Update the position.
 	m_positionX += sinf(radians) * m_forwardSpeed;
-	m_positionZ += cosf(radians) * m_forwardSpeed;
+	m_positionZ += cosf(radians) * m_forwardSpeed;	
 }
 
 void PositionClass::MoveBackward(bool keydown)
@@ -105,19 +106,20 @@ void PositionClass::MoveBackward(bool keydown)
 	// Update the forward speed movement based on the frame time and whether the user is holding the key down or not.
 	if (keydown)
 	{
-		m_forwardSpeed += m_frameTime * a_moveSpeedUp;
-		if (m_forwardSpeed > (m_frameTime * 50.0f))
+		m_backwardSpeed += m_frameTime * 0.003f;
+
+		if (m_backwardSpeed > (m_frameTime * 0.15f))
 		{
-			m_forwardSpeed = m_frameTime * 50.0f;
+			m_backwardSpeed = m_frameTime * 0.15f;
 		}
 	}
 	else
 	{
-		m_forwardSpeed -= m_frameTime * a_moveSpeedDown;
+		m_backwardSpeed -= m_frameTime * 0.0007f;
 
-		if (m_forwardSpeed < 0.0f)
+		if (m_backwardSpeed < 0.0f)
 		{
-			m_forwardSpeed = 0.0f;
+			m_backwardSpeed = 0.0f;
 		}
 	}
 
@@ -125,8 +127,8 @@ void PositionClass::MoveBackward(bool keydown)
 	radians = m_rotationY * 0.0174532925f;	//=2pi/360
 
 	// Update the position.
-	m_positionX -= sinf(radians) * m_forwardSpeed;
-	m_positionZ -= cosf(radians) * m_forwardSpeed;
+	m_positionX -= sinf(radians) * m_backwardSpeed;
+	m_positionZ -= cosf(radians) * m_backwardSpeed;
 }
 
 void PositionClass::MoveUpward(bool keydown)
@@ -134,16 +136,16 @@ void PositionClass::MoveUpward(bool keydown)
 	// Update the upward speed movement based on the frame time and whether the user is holding the key down or not.
 	if (keydown)
 	{
-		m_upwardSpeed += m_frameTime * 1.5f;
+		m_upwardSpeed += m_frameTime * 0.003f;
 
-		if (m_upwardSpeed > (m_frameTime * 15.0f))
+		if (m_upwardSpeed > (m_frameTime * 0.03f))
 		{
-			m_upwardSpeed = m_frameTime * 15.0f;
+			m_upwardSpeed = m_frameTime * 0.03f;
 		}
 	}
 	else
 	{
-		m_upwardSpeed -= m_frameTime * 0.5f;
+		m_upwardSpeed -= m_frameTime * 0.002f;
 
 		if (m_upwardSpeed < 0.0f)
 		{
@@ -160,16 +162,16 @@ void PositionClass::MoveDownward(bool keydown)
 	// Update the downward speed movement based on the frame time and whether the user is holding the key down or not.
 	if (keydown)
 	{
-		m_downwardSpeed += m_frameTime * 1.5f;
+		m_downwardSpeed += m_frameTime * 0.003f;
 
-		if (m_downwardSpeed > (m_frameTime * 15.0f))
+		if (m_downwardSpeed > (m_frameTime * 0.03f))
 		{
-			m_downwardSpeed = m_frameTime * 15.0f;
+			m_downwardSpeed = m_frameTime * 0.03f;
 		}
 	}
 	else
 	{
-		m_downwardSpeed -= m_frameTime * 0.5f;
+		m_downwardSpeed -= m_frameTime * 0.002f;
 
 		if (m_downwardSpeed < 0.0f)
 		{
@@ -187,16 +189,16 @@ void PositionClass::TurnLeft(bool keydown)
 	// Update the left turn speed movement based on the frame time and whether the user is holding the key down or not.
 	if (keydown)
 	{
-		m_leftTurnSpeed += m_frameTime * 5.0f;
+		m_leftTurnSpeed += m_frameTime * 0.01f;
 
-		if (m_leftTurnSpeed > (m_frameTime * 150.0f))
+		if (m_leftTurnSpeed > (m_frameTime * 0.15f))
 		{
-			m_leftTurnSpeed = m_frameTime * 150.0f;
+			m_leftTurnSpeed = m_frameTime * 0.15f;
 		}
 	}
 	else
 	{
-		m_leftTurnSpeed -= m_frameTime* 3.5f;
+		m_leftTurnSpeed -= m_frameTime* 0.005f;
 
 		if (m_leftTurnSpeed < 0.0f)
 		{
@@ -219,16 +221,16 @@ void PositionClass::TurnRight(bool keydown)
 	// Update the right turn speed movement based on the frame time and whether the user is holding the key down or not.
 	if (keydown)
 	{
-		m_rightTurnSpeed += m_frameTime * 5.0f;
+		m_rightTurnSpeed += m_frameTime * 0.01f;
 
-		if (m_rightTurnSpeed > (m_frameTime * 150.0f))
+		if (m_rightTurnSpeed > (m_frameTime * 0.15f))
 		{
-			m_rightTurnSpeed = m_frameTime * 150.0f;
+			m_rightTurnSpeed = m_frameTime * 0.15f;
 		}
 	}
 	else
 	{
-		m_rightTurnSpeed -= m_frameTime* 3.5f;
+		m_rightTurnSpeed -= m_frameTime* 0.005f;
 
 		if (m_rightTurnSpeed < 0.0f)
 		{
@@ -253,16 +255,16 @@ void PositionClass::LookUpward(bool keydown)
 	// Update the upward rotation speed movement based on the frame time and whether the user is holding the key down or not.
 	if (keydown)
 	{
-		m_lookUpSpeed += m_frameTime * 7.5f;
+		m_lookUpSpeed += m_frameTime * 0.01f;
 
-		if (m_lookUpSpeed > (m_frameTime * 75.0f))
+		if (m_lookUpSpeed > (m_frameTime * 0.15f))
 		{
-			m_lookUpSpeed = m_frameTime * 75.0f;
+			m_lookUpSpeed = m_frameTime * 0.15f;
 		}
 	}
 	else
 	{
-		m_lookUpSpeed -= m_frameTime* 2.0f;
+		m_lookUpSpeed -= m_frameTime* 0.005f;
 
 		if (m_lookUpSpeed < 0.0f)
 		{
@@ -285,16 +287,16 @@ void PositionClass::LookDownward(bool keydown)
 	// Update the downward rotation speed movement based on the frame time and whether the user is holding the key down or not.
 	if (keydown)
 	{
-		m_lookDownSpeed += m_frameTime * 7.5f;
+		m_lookDownSpeed += m_frameTime * 0.01f;
 
-		if (m_lookDownSpeed > (m_frameTime * 75.0f))
+		if (m_lookDownSpeed > (m_frameTime * 0.15f))
 		{
-			m_lookDownSpeed = m_frameTime * 75.0f;
+			m_lookDownSpeed = m_frameTime * 0.15f;
 		}
 	}
 	else
 	{
-		m_lookDownSpeed -= m_frameTime* 2.0f;
+		m_lookDownSpeed -= m_frameTime* 0.005f;
 
 		if (m_lookDownSpeed < 0.0f)
 		{

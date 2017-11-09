@@ -36,7 +36,8 @@ bool InputClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidth, int
 	m_mouseY = 0;
 
 	// Initialize the main direct input interface.
-	result = DirectInput8Create(hinstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_directInput, NULL);
+	result = DirectInput8Create(hinstance, DIRECTINPUT_VERSION, 
+		IID_IDirectInput8, (void**)&m_directInput, NULL);
 	if (FAILED(result))
 	{
 		return false;
@@ -166,7 +167,8 @@ bool InputClass::ReadKeyboard()
 
 
 	// Read the keyboard device.
-	result = m_keyboard->GetDeviceState(sizeof(m_keyboardState), (LPVOID)&m_keyboardState);
+	result = m_keyboard->GetDeviceState(sizeof(m_keyboardState), 
+		(LPVOID)&m_keyboardState);
 	if (FAILED(result))
 	{
 		// If the keyboard lost focus or was not acquired then try to get control back.
@@ -190,7 +192,8 @@ bool InputClass::ReadMouse()
 
 
 	// Read the mouse device.
-	result = m_mouse->GetDeviceState(sizeof(DIMOUSESTATE), (LPVOID)&m_mouseState);
+	result = m_mouse->GetDeviceState(sizeof(DIMOUSESTATE), 
+		(LPVOID)&m_mouseState);
 	if (FAILED(result))
 	{
 		// If the mouse lost focus or was not acquired then try to get control back.

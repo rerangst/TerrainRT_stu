@@ -50,6 +50,12 @@ void ZoneClass::HandleMovementInput(InputClass* Input, float frameTime)
 	{
 		m_displayUI = !m_displayUI;
 	}
+	//F2 wireFrame dislayed or not
+	if (Input->IsF2Toggled())
+	{
+		m_wireFrame = !m_wireFrame;
+	}
+
 }
 
 bool ZoneClass::Render(D3dClass* Direct3D, ShaderManagerClass* ShaderManager)
@@ -69,6 +75,16 @@ bool ZoneClass::Render(D3dClass* Direct3D, ShaderManagerClass* ShaderManager)
 	// Clear the buffers to begin the scene.
 	Direct3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 
+	// Turn on wire frame rendering of the terrain if needed.
+	if (m_wireFrame)
+	{
+		Direct3D->EnableWireframe();
+	}
+	else
+	{
+		Direct3D->DisableWireframe();
+	}
+
 	// Render the terrain grid using the color shader.
 	m_Terrain->Render(Direct3D->GetDeviceContext());
 	result = ShaderManager->RenderColorShader(Direct3D->GetDeviceContext(), m_Terrain->GetIndexCount(), worldMatrix, viewMatrix,
@@ -77,6 +93,12 @@ bool ZoneClass::Render(D3dClass* Direct3D, ShaderManagerClass* ShaderManager)
 	{
 		return false;
 	}
+
+	//// Turn off wire frame rendering of the terrain if it was on.
+	//if (!m_wireFrame)
+	//{
+	//	Direct3D->DisableWireframe();
+	//}
 
 	// Render the user interface.
 	if (m_displayUI)
@@ -147,7 +169,7 @@ bool ZoneClass::Initialize(D3dClass * Direct3D, HWND hwnd, int screenWidth, int 
 	}
 
 	// Set the initial position and rotation.
-	m_Position->SetPosition(128.0f, 5.0f, -10.0f);
+	m_Position->SetPosition(128.0f, 10.0f, -10.0f);
 	m_Position->SetRotation(0.0f, 0.0f, 0.0f);
 
 	// Create the terrain object.
@@ -158,7 +180,7 @@ bool ZoneClass::Initialize(D3dClass * Direct3D, HWND hwnd, int screenWidth, int 
 	}
 
 	// Initialize the terrain object.
-	result = m_Terrain->Initialize(Direct3D->GetDevice());
+	result = m_Terrain->Initialize(Direct3D->GetDevice(), "data/setup.txt");
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the terrain object.", L"Error", MB_OK);
@@ -166,8 +188,8 @@ bool ZoneClass::Initialize(D3dClass * Direct3D, HWND hwnd, int screenWidth, int 
 	}
 
 	// Set the UI to display by default.
-	m_displayUI = true;
-
+	m_displayUI = false;
+	m_wireFrame = false;
 	return true;
 }
 

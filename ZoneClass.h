@@ -21,7 +21,7 @@ class ZoneClass
 	CameraClass* m_Camera;
 	PositionClass* m_Position;
 	TerrainClass* m_Terrain;
-	bool m_displayUI;
+	bool m_displayUI, m_wireFrame;
 public:
 	ZoneClass();
 	~ZoneClass();

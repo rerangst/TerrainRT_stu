@@ -9,17 +9,6 @@ class PositionClass
 	// turnLeft, turnRight ~ ry
 	// lookup, lookdown ~ rx
 	// speed= frameTime* gia toc( ect: 1.0f, 5.0f,...)
-	float a_moveSpeedUp ; 
-	float a_moveSpeedDown ;
-	float m_positionX, m_positionY, m_positionZ;
-	float m_rotationX, m_rotationY, m_rotationZ;
-
-	float m_frameTime;
-
-	float m_forwardSpeed, m_backwardSpeed;
-	float m_upwardSpeed, m_downwardSpeed;
-	float m_leftTurnSpeed, m_rightTurnSpeed;
-	float m_lookUpSpeed, m_lookDownSpeed;
 public:
 	PositionClass();
 	~PositionClass();
@@ -39,6 +28,18 @@ public:
 	void TurnRight(bool keydown);
 	void LookUpward(bool keydown);
 	void LookDownward(bool keydown);
+private:
+	float a_moveSpeedUp;
+	float a_moveSpeedDown;
+	float m_positionX, m_positionY, m_positionZ;
+	float m_rotationX, m_rotationY, m_rotationZ;
+
+	float m_frameTime;
+
+	float m_forwardSpeed, m_backwardSpeed;
+	float m_upwardSpeed, m_downwardSpeed;
+	float m_leftTurnSpeed, m_rightTurnSpeed;
+	float m_lookUpSpeed, m_lookDownSpeed;
 };
 
 #endif // !POSITIONCLASS_H
