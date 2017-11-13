@@ -169,7 +169,7 @@ bool ZoneClass::Initialize(D3dClass * Direct3D, HWND hwnd, int screenWidth, int 
 	}
 
 	// Set the initial position and rotation.
-	m_Position->SetPosition(128.0f, 10.0f, -10.0f);
+	m_Position->SetPosition(0.0f, 10.0f, 0.0f);
 	m_Position->SetRotation(0.0f, 0.0f, 0.0f);
 
 	// Create the terrain object.
@@ -188,7 +188,7 @@ bool ZoneClass::Initialize(D3dClass * Direct3D, HWND hwnd, int screenWidth, int 
 	}
 
 	// Set the UI to display by default.
-	m_displayUI = false;
+	m_displayUI = true;
 	m_wireFrame = false;
 	return true;
 }

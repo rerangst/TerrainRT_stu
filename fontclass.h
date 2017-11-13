@@ -42,7 +42,7 @@ public:
 	FontClass(const FontClass&);
 	~FontClass();
 
-	bool Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* fontFilename, char* textureFilename,
+	bool Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* fontFilename, WCHAR* textureFilename,
 		float fontHeight, int spaceSize);
 	void Shutdown();
 
@@ -54,7 +54,7 @@ public:
 private:
 	bool LoadFontData(char*);
 	void ReleaseFontData();
-	bool LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename);
+	bool LoadTexture(ID3D11Device*, WCHAR*);
 	void ReleaseTexture();
 
 private:

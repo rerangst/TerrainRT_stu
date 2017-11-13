@@ -21,7 +21,7 @@ FontClass::~FontClass()
 }
 
 
-bool FontClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* fontFilename, char* textureFilename, 
+bool FontClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* fontFilename, WCHAR* textureFilename,
 						   float fontHeight, int spaceSize)
 {
 	bool result;
@@ -41,7 +41,7 @@ bool FontClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCont
 	}
 
 	// Load the texture that has the font characters on it.
-	result = LoadTexture(device, deviceContext, textureFilename);
+	result = LoadTexture(device, textureFilename);
 	if(!result)
 	{
 		return false;
@@ -123,7 +123,7 @@ void FontClass::ReleaseFontData()
 }
 
 
-bool FontClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename)
+bool FontClass::LoadTexture(ID3D11Device* device, WCHAR* filename)
 {
 	bool result;
 
@@ -136,7 +136,7 @@ bool FontClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceCon
 	}
 
 	// Initialize the texture object.
-	result = m_Texture->Initialize(device, deviceContext, filename);
+	result = m_Texture->Initialize(device, filename);
 	if(!result)
 	{
 		return false;

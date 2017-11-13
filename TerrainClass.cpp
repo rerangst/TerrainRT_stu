@@ -28,8 +28,8 @@ bool TerrainClass::InitializeBuffers(ID3D11Device * device)
 	float positionX, positionZ;
 
 	// Set the height and width of the terrain grid.
-	terrainHeight = 256;
-	terrainWidth = 256;
+	//terrainHeight = 300;
+	//terrainWidth = 300;
 
 	// Set the color of the terrain grid.
 	color = D3DXVECTOR4(1.0f, 1.0f, 1.0f, 1.0f);

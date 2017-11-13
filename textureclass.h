@@ -9,7 +9,8 @@
 // INCLUDES //
 //////////////
 #include <d3d11.h>
-#include <stdio.h>
+#include <d3dx11tex.h>
+#include <fstream>
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +33,7 @@ public:
 	TextureClass(const TextureClass&);
 	~TextureClass();
 
-	bool Initialize(ID3D11Device*, ID3D11DeviceContext*, char*);
+	bool Initialize(ID3D11Device* device, WCHAR*  filename);
 	void Shutdown();
 
 	ID3D11ShaderResourceView* GetTexture();
